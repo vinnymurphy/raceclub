@@ -1,6 +1,12 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+from os.path import abspath, dirname, join
+here = lambda *x: join(abspath(dirname(__file__)), *x)
+PROJECT_ROOT = here('..', '..')
+root = lambda *x: join(abspath(PROJECT_ROOT), *x)
+
+
 ADMINS = (
     ('Vinny Murphy', 'murphy.vinny@gmail.com'),
 )
@@ -23,14 +29,12 @@ USE_L10N = True
 USE_TZ = True
 MEDIA_ROOT = ''
 MEDIA_URL = ''
-STATIC_ROOT = ''
+STATIC_ROOT = root('collected_static')
 STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    root('assets'),
 )
 
 # List of finder classes that know how to find static files in
@@ -65,9 +69,7 @@ ROOT_URLCONF = 'raceclub.urls'
 WSGI_APPLICATION = 'raceclub.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    root('templates'),
 )
 
 INSTALLED_APPS = (
@@ -77,10 +79,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admin',
+    'django.contrib.admindocs',
 )
 
 # A sample logging configuration. The only tangible logging
